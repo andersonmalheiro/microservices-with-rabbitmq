@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  auth-db:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_DB: "auth-db"
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/lib/postgresql/data
+
+  products-db:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_DB: "products-db"
+      
+    ports:
+      - "5433:5432"
+    volumes:
+      - /var/lib/postgresql/data
+  
+  sales-db:
+    image: tutum/mongodb
+    restart: always
+    environment:
+      MONGODB_USER: "admin"
+      MONGODB_PASS: "12345"
+      MONGODB_DATABASE: "sales-db"
+    ports:
+      - "27017:27017"
+    volumes:
+      - /var/lib/mongodb/data
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "25676:25676"
+      - "15672:15672"
+    volumes:
+      - /var/lib/rabbitmq/data
