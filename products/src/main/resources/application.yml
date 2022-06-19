@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: products-api
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+  datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgres://localhost:5433/products-db
+    username: admin
+    password: 12345
