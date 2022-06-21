@@ -18,5 +18,8 @@ This project is configured with docker-compose, so all the services and necessar
 - Products database: `docker-compose up products-db`
 - Sales database: `docker-compose up sales-db`
 
-### 🐰 RabbitMQ
-- RabbitMQ: `docker-compose up rabbitmq`
+### ⚙ Services
+- 🐰 RabbitMQ: `docker-compose up rabbitmq`
+- 🔐 Auth: `docker-compose up auth-api`
+- 🛒 Products: `docker-compose up products-api`
+- 💰 Sales: `docker-compose up sales-api`
