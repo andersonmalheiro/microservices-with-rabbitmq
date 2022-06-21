@@ -13,6 +13,16 @@ services:
     volumes:
       - /var/lib/postgresql/data
 
+  auth-api:
+    image: auth-api
+    build:
+      context: auth
+      dockerfile: ./Dockerfile
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+
   products-db:
     image: postgres:11
     restart: always
@@ -25,6 +35,16 @@ services:
       - "5433:5432"
     volumes:
       - /var/lib/postgresql/data
+
+  products-api:
+    image: products-api
+    build:
+      context: products
+      dockerfile: ./Dockerfile
+    environment:
+      PORT: 8081
+    ports:
+      - "8081:8081"
   
   sales-db:
     image: tutum/mongodb
@@ -37,6 +57,16 @@ services:
       - "27017:27017"
     volumes:
       - /var/lib/mongodb/data
+
+  sales-api:
+    image: sales-api
+    build:
+      context: sales
+      dockerfile: ./Dockerfile
+    environment:
+      PORT: 8082
+    ports:
+      - "8082:8082"
   
   rabbitmq:
     image: rabbitmq:3-management
