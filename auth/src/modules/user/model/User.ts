@@ -1,4 +1,4 @@
-import sequelize from "config/db/dbConfig";
+import sequelize from "../../../config/db/dbConfig";
 import {
   DataTypes,
   Model,

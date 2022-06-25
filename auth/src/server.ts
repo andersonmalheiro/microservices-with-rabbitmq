@@ -1,4 +1,4 @@
-import * as db from "config/db/initialData";
+import * as db from "./config/db/initialData";
 import app from "./app";
 
 const port = process.env.PORT || 8080;

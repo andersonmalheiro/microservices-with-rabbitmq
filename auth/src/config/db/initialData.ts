@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import User from "modules/user/model/User";
+import User from "../../modules/user/model/User";
 
 export const createInitialData = async () => {
   const saltRounds = 10;
