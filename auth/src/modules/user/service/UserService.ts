@@ -1,4 +1,4 @@
-import statusCodes from "config/constants/statusCodes";
+import statusCodes from "../../../config/constants/statusCodes";
 import { Request } from "express";
 import UserRepository from "../repository/UserRepository";
 
