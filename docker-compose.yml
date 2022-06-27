@@ -20,6 +20,8 @@ services:
       dockerfile: ./Dockerfile
     environment:
       PORT: 8080
+      NODE_ENV: production
+      TS_NODE_BASEURL: ./build
     ports:
       - "8080:8080"
 
