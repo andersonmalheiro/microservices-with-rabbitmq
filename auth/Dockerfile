@@ -15,4 +15,4 @@ RUN chown -R node /usr/src/app
 
 USER node
 
-CMD ["node", "src/server.js"]
+CMD ["node", "-r", "tsconfig-paths/register", "build/server.js"]
