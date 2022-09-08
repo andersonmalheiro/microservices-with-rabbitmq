@@ -1,5 +1,6 @@
 import { makeLeft, makeRight } from "utils/functions/either";
 import { Either } from "utils/models/Either";
+import { InternalError, NotFoundError } from "utils/models/Error";
 import UserModel, { UserData } from "../model/User";
 
 export default class UserRepository {
@@ -15,17 +16,21 @@ export default class UserRepository {
 
   public async findByEmail(
     userEmail: string
-  ): Promise<Either<null | undefined, UserData>> {
-    const result = await UserModel.findOne({
-      where: { email: userEmail },
-    });
+  ): Promise<Either<NotFoundError | InternalError, UserData>> {
+    try {
+      const queryResult = await UserModel.findOne({
+        where: { email: userEmail },
+      });
 
-    if (!result) {
-      return makeLeft(null);
+      if (!queryResult) {
+        return makeLeft(new NotFoundError("User not found"));
+      }
+
+      const { id, name, email, createdAt, updatedAt, deletedAt } = queryResult;
+
+      return makeRight({ id, name, email, createdAt, updatedAt, deletedAt });
+    } catch (error) {
+      return makeLeft(new InternalError((error as Error).message));
     }
-
-    const { id, name, email, createdAt, updatedAt, deletedAt } = result;
-
-    return makeRight({ id, name, email, createdAt, updatedAt, deletedAt });
   }
 }
