@@ -7,7 +7,19 @@ import {
   CreationOptional,
 } from "sequelize";
 
-export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
+}
+
+export type UserData = Omit<User, "password">;
+
+export default class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
   declare id: CreationOptional<number>;
   declare name: string;
   declare email: string;
@@ -17,7 +29,7 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
   declare deletedAt: CreationOptional<Date>;
 }
 
-User.init(
+UserModel.init(
   {
     id: {
       type: DataTypes.INTEGER,
