@@ -1,4 +1,5 @@
 import { Router } from "express";
+import UserRouter from './user';
 
 const mainRouter = Router();
 
@@ -12,5 +13,7 @@ mainRouter.get("/api/status", (req, res) => {
     })
     .send();
 });
+
+mainRouter.use(UserRouter);
 
 export default mainRouter;
