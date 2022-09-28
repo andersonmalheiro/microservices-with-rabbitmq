@@ -2,13 +2,13 @@ import {
   isLeft,
   makeLeft,
   makeRight,
-  unwrapEither,
+  unwrapEither
 } from "@utils/functions/either";
 import { Either } from "@utils/models/Either";
 import { BadRequestError, ForbiddenError } from "@utils/models/Error";
 import { emailValidator, passwordValidator } from "@utils/validators";
-import Login from "../model/Login";
 import bcrypt from "bcrypt";
+import { Login } from "../model/Auth";
 
 export const loginValidator = (data: Login): Either<BadRequestError, true> => {
   const { email, password } = data;

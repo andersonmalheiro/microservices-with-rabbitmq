@@ -1,7 +1,12 @@
 import { Router } from "express";
+import checkTokenMiddleware from 'middleware/CheckToken';
 import UserRoutes from '../modules/user/routes/UserRoutes';
 
 const mainRouter = Router();
+
+mainRouter.use(UserRoutes);
+
+mainRouter.use(checkTokenMiddleware);
 
 mainRouter.get("/api/status", (req, res) => {
   return res
@@ -13,7 +18,5 @@ mainRouter.get("/api/status", (req, res) => {
     })
     .send();
 });
-
-mainRouter.use(UserRoutes);
 
 export default mainRouter;
