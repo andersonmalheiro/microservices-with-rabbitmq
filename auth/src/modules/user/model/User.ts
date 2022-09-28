@@ -17,8 +17,6 @@ export interface User {
   deletedAt?: Date;
 }
 
-export type UserData = Omit<User, "password">;
-
 export default class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
   declare id: CreationOptional<number>;
   declare name: string;
