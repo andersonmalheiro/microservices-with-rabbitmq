@@ -14,9 +14,11 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./src",
     "paths": {
+      "@core/*": ["core/*"],
       "@config/*": ["config/*"],
       "@modules/*": ["modules/*"],
       "@routes/*": ["routes/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],
