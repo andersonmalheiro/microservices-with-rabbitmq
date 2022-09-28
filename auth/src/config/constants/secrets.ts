@@ -1,0 +1,1 @@
+export const apiSecret = process.env.API_SECRET ?? 'YXBpLXNlY3JldC10b2tlbgoK';
