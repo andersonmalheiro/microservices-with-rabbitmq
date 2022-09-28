@@ -1,14 +1,15 @@
+import { apiSecret } from "@config/constants/secrets";
 import statusCodes from "@config/constants/statusCodes";
+import { emailValidator } from "@utils/validators";
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { isLeft, unwrapEither } from "utils/functions/either";
 import { InternalError, NotFoundError } from "utils/models/Error";
 import { CustomResponse } from "utils/models/Request";
-import { emailValidator } from "@utils/validators";
-import { loginValidator, userPasswordValidator } from "../validators/login";
+import { AuthUser } from "../model/Auth";
 import { User } from "../model/User";
 import UserRepository from "../repository/UserRepository";
-import jwt from "jsonwebtoken";
-import { apiSecret } from "@config/constants/secrets";
+import { loginValidator, userPasswordValidator } from "../validators/login";
 
 type ErrorResponse = Response<NotFoundError> | Response<InternalError>;
 
@@ -57,7 +58,7 @@ class UserService {
   public async getAccessToken(
     request: Request,
     response: Response
-  ): Promise<ErrorResponse | undefined> {
+  ): Promise<ErrorResponse | CustomResponse<AuthUser>> {
     try {
       const { email, password } = request.body;
 
@@ -96,13 +97,10 @@ class UserService {
           .send();
       }
 
-      const authUser = { id: user.id, name: user.name, email };
+      const authUser: AuthUser = { id: user.id, name: user.name, email };
       const accessToken = jwt.sign(authUser, apiSecret, { expiresIn: "1d" });
 
-      return response
-        .status(statusCodes.SUCCESS)
-        .json({ accessToken })
-        .send();
+      return response.status(statusCodes.SUCCESS).json({ accessToken }).send();
     } catch (error) {
       return response
         .status(statusCodes.INTERNAL_ERROR)
