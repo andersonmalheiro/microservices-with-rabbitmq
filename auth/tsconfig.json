@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
+    "target": "es6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "allowJs": true,
     "checkJs": true,
     "declaration": true,
     "declarationMap": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -18,7 +19,8 @@
       "@config/*": ["config/*"],
       "@modules/*": ["modules/*"],
       "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@db/*": ["db/*"]
     }
   },
   "include": ["src"],

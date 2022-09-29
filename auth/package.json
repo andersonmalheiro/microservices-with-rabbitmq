@@ -1,14 +1,15 @@
 {
-  "name": "auth",
+  "name": "auth-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
   "license": "MIT",
   "type": "commonjs",
   "scripts": {
-    "build": "tsc",
+    "build": "NODE_ENV=development tsc",
     "start:dev": "NODE_ENV=development tsnd --respawn -r tsconfig-paths/register src/server.ts",
-    "start:prod": "NODE_ENV=production TS_NODE_BASEURL=./build node -r tsconfig-paths/register build/server.js",
-    "sql:migration": "sh ./migration-gen.sh -n"
+    "start:prod": "NODE_ENV=production TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/server.js",
+    "sql:migration": "sh ./migration-gen.sh -n",
+    "db:migrate": "yarn build && sequelize-cli db:migrate"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -23,7 +24,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.9",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.7.23",
     "sequelize-cli": "^6.5.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.0.0",
