@@ -15,12 +15,13 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./src",
     "paths": {
-      "@core/*": ["core/*"],
       "@config/*": ["config/*"],
+      "@core/*": ["core/*"],
+      "@db/*": ["db/*"],
+      "@middleware/*": ["middleware/*"],
       "@modules/*": ["modules/*"],
       "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"],
-      "@db/*": ["db/*"]
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],

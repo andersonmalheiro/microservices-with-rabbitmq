@@ -1,12 +1,12 @@
+import AuthRouter from "@modules/auth/router/AuthRouter";
+import UserRouter from "@modules/user/router/UserRouter";
 import { Router } from "express";
-import checkTokenMiddleware from 'middleware/CheckToken';
-import UserRoutes from '../modules/user/routes/UserRoutes';
+import AuthorizationMiddleware from "@middleware/AuthorizationMiddleware";
 
 const mainRouter = Router();
 
-mainRouter.use(UserRoutes);
-
-mainRouter.use(checkTokenMiddleware);
+mainRouter.use("/api/auth", AuthRouter);
+mainRouter.use("/api/user", AuthorizationMiddleware, UserRouter);
 
 mainRouter.get("/api/status", (req, res) => {
   return res
