@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: ${PORT:8081}
 
 spring:
   application:
@@ -9,11 +9,19 @@ spring:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
+      format-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
 
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgres://localhost:5433/products-db
-    username: admin
-    password: 12345
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:products-db}
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:12345}
+    initialization-mode: always
+    initialize: true
+    continue-on-error: true
+    maxActive: 3
