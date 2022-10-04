@@ -8,6 +8,7 @@ class CategoryDTO {
     ) {
         companion object {
             fun from(category: Category) = Create(description = category.description)
+            fun to(data: Create) = Category(description = data.description)
         }
     }
 

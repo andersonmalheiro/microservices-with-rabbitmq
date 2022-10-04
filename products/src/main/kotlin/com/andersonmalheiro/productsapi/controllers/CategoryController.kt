@@ -2,12 +2,15 @@ package com.andersonmalheiro.productsapi.controllers
 
 import arrow.core.Either
 import com.andersonmalheiro.productsapi.core.response.APIResponse
+import com.andersonmalheiro.productsapi.dto.CategoryDTO
 import com.andersonmalheiro.productsapi.model.Category
 import com.andersonmalheiro.productsapi.service.CategoryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -20,26 +23,66 @@ class CategoryController(private val service: CategoryService) {
         try {
             if (id < 0) {
                 return APIResponse.create<Nothing>(
-                    statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
-                    message = "Invalid ID value"
+                        statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
+                        message = "Invalid ID value"
                 )
             }
 
             return when (val result = service.getCategoryById(id)) {
                 is Either.Left -> {
                     APIResponse.create<Nothing>(
-                        statusCode = HttpStatus.NOT_FOUND,
-                        message = "Category not found"
+                            statusCode = HttpStatus.NOT_FOUND,
+                            message = "Category not found"
                     )
                 }
 
                 is Either.Right -> {
-                    APIResponse.create<Category>(HttpStatus.OK, data = result.value)
+                    APIResponse.create(HttpStatus.OK, data = result.value)
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
             return APIResponse.create<Nothing>(statusCode = HttpStatus.OK, stack = e.stackTraceToString())
+        }
+    }
+
+    @PostMapping
+    fun createCategory(@RequestBody data: CategoryDTO.Create): ResponseEntity<String> {
+        if (data.description.isEmpty()) {
+            return APIResponse.create<Nothing>(
+                    statusCode = HttpStatus.BAD_REQUEST,
+                    message = "Description field is required"
+            )
+        }
+
+        try {
+            return when (val result = service.createCategory(CategoryDTO.Create.to(data))) {
+                is Either.Left -> {
+                    APIResponse.create<Nothing>(
+                            statusCode = HttpStatus.NOT_FOUND,
+                            message = "Category not found"
+                    )
+                }
+
+                is Either.Right -> {
+                    APIResponse.create(HttpStatus.CREATED, data = result.value)
+                }
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return APIResponse.create<Nothing>(statusCode = HttpStatus.OK, stack = e.stackTraceToString())
+        }
+    }
+
+    @GetMapping
+    fun listCategories(): ResponseEntity<String> {
+        return try {
+            val result = service.getAllCategories()
+            APIResponse.create(statusCode = HttpStatus.OK, data = result)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            APIResponse.create<Nothing>(statusCode = HttpStatus.OK, stack = e.stackTraceToString())
         }
     }
 }

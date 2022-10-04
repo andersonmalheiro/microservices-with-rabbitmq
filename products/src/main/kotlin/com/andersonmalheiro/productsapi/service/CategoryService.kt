@@ -12,6 +12,7 @@ class CategoryService(private val repository: CategoryRepository) {
     fun createCategory(data: Category): Either<IllegalArgumentException, Category>  {
         return try {
             val result = repository.save(data)
+            repository.flush()
             Either.Right(result)
         } catch (e: IllegalArgumentException) {
             Either.Left(e)
