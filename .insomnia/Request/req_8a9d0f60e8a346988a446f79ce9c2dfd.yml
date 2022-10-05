@@ -1,0 +1,30 @@
+_id: req_8a9d0f60e8a346988a446f79ce9c2dfd
+type: Request
+parentId: fld_f788382ea9f64d58b52de43abd1eb1ea
+modified: 1664973077854
+created: 1664388494261
+url: "{{ _.auth }}/auth/login"
+name: Login
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"email": "user@email.com",
+    	"password": "qwe123"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_549fbc4589e2487381ce1eea9add7e2c
+authentication: {}
+metaSortKey: -1664901151690.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

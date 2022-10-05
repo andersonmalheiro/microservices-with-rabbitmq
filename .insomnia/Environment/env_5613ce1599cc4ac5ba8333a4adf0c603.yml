@@ -1,0 +1,16 @@
+_id: env_5613ce1599cc4ac5ba8333a4adf0c603
+type: Environment
+parentId: env_ad731d2d26428a4289058a7a2cd684155543b005
+modified: 1664973022551
+created: 1664388401130
+name: microservices
+data:
+  auth: http://localhost:8080/api
+  products: http://localhost:8081/api
+dataPropertyOrder:
+  "&":
+    - auth
+    - products
+color: "#ff6600"
+isPrivate: false
+metaSortKey: 1664388401130
