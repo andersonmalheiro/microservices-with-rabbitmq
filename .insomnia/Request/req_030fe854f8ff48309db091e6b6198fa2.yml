@@ -1,0 +1,29 @@
+_id: req_030fe854f8ff48309db091e6b6198fa2
+type: Request
+parentId: fld_f788382ea9f64d58b52de43abd1eb1ea
+modified: 1664973099824
+created: 1662647916128
+url: "{{ _.auth }}/user/findByEmail"
+name: Find user by email
+description: ""
+method: GET
+body: {}
+parameters:
+  - id: pair_1b1be13cae92405299ae85563e789698
+    name: email
+    value: user@email.com
+    description: ""
+headers: []
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVXNlciI6eyJpZCI6MSwibmFtZSI6IlRlc3RVc2VyIiwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSJ9LCJpYXQiOjE2NjQ0ODE5NzAsImV4cCI6MTY2NDU2ODM3MH0.DavO1oh_lhZHrozOHkUNXkqymzO4xTq1N4uaWG_lKWo
+  prefix: ""
+  disabled: false
+metaSortKey: -1664901151640.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

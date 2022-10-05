@@ -1,0 +1,28 @@
+_id: req_1b209b4364bf41ddaecf7eb3646bd7f6
+type: Request
+parentId: fld_151efd3435314d83b83b3dc80e71506a
+modified: 1664973344122
+created: 1664973313711
+url: "{{ _.products }}/category"
+name: New Request
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"description": "Hardware"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1664973313711
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

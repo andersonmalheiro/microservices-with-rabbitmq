@@ -1,0 +1,21 @@
+_id: req_6152b32184d24eccb9f62f9f0d5babe0
+type: Request
+parentId: fld_151efd3435314d83b83b3dc80e71506a
+modified: 1664973283223
+created: 1664829342702
+url: "{{ _.products }}/category/1000"
+name: Get category by ID
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1664829342702
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

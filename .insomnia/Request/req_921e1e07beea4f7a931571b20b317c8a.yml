@@ -1,0 +1,24 @@
+_id: req_921e1e07beea4f7a931571b20b317c8a
+type: Request
+parentId: fld_f788382ea9f64d58b52de43abd1eb1ea
+modified: 1664973089472
+created: 1662647878924
+url: "{{ _.auth }}/status"
+name: API Status
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3RVc2VyIiwiZW1haWwiOiJ1c2VyQGVtYWlsLmNvbSIsImlhdCI6MTY2NDM4ODY1NSwiZXhwIjoxNjY0NDc1MDU1fQ.LKsSjEToLdVCpMyflBG-os25mLcnM9YsKChohdW2ctI
+  prefix: bearer
+metaSortKey: -1664901151665.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

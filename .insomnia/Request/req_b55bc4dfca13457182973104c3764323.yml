@@ -1,0 +1,21 @@
+_id: req_b55bc4dfca13457182973104c3764323
+type: Request
+parentId: fld_91845431b14748069828b71c6a6361f9
+modified: 1664973133528
+created: 1664885832090
+url: "{{ _.products }}/status"
+name: API Status
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1664608918481.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
