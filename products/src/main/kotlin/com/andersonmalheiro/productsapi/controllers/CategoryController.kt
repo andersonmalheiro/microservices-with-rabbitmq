@@ -3,16 +3,10 @@ package com.andersonmalheiro.productsapi.controllers
 import arrow.core.Either
 import com.andersonmalheiro.productsapi.core.response.APIResponse
 import com.andersonmalheiro.productsapi.dto.CategoryDTO
-import com.andersonmalheiro.productsapi.model.Category
 import com.andersonmalheiro.productsapi.service.CategoryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/category")
@@ -23,16 +17,16 @@ class CategoryController(private val service: CategoryService) {
         try {
             if (id < 0) {
                 return APIResponse.create<Nothing>(
-                        statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
-                        message = "Invalid ID value"
+                    statusCode = HttpStatus.BAD_REQUEST,
+                    message = "Invalid ID value"
                 )
             }
 
             return when (val result = service.getCategoryById(id)) {
                 is Either.Left -> {
                     APIResponse.create<Nothing>(
-                            statusCode = HttpStatus.NOT_FOUND,
-                            message = "Category not found"
+                        statusCode = HttpStatus.NOT_FOUND,
+                        message = "Category not found"
                     )
                 }
 
@@ -42,7 +36,11 @@ class CategoryController(private val service: CategoryService) {
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            return APIResponse.create<Nothing>(statusCode = HttpStatus.OK, stack = e.stackTraceToString())
+            return APIResponse.create<Nothing>(
+                statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
+                message = e.message ?: "Something went wrong",
+                stack = e.stackTraceToString()
+            )
         }
     }
 
@@ -50,17 +48,18 @@ class CategoryController(private val service: CategoryService) {
     fun createCategory(@RequestBody data: CategoryDTO.Create): ResponseEntity<String> {
         if (data.description.isEmpty()) {
             return APIResponse.create<Nothing>(
-                    statusCode = HttpStatus.BAD_REQUEST,
-                    message = "Description field is required"
+                statusCode = HttpStatus.BAD_REQUEST,
+                message = "Description field is required"
             )
         }
 
         try {
             return when (val result = service.createCategory(CategoryDTO.Create.to(data))) {
                 is Either.Left -> {
+                    val error = result.value
                     APIResponse.create<Nothing>(
-                            statusCode = HttpStatus.NOT_FOUND,
-                            message = "Category not found"
+                        statusCode = HttpStatus.BAD_REQUEST,
+                        message = error.message ?: "Something went wrong"
                     )
                 }
 
@@ -71,7 +70,11 @@ class CategoryController(private val service: CategoryService) {
 
         } catch (e: Exception) {
             e.printStackTrace()
-            return APIResponse.create<Nothing>(statusCode = HttpStatus.OK, stack = e.stackTraceToString())
+            return APIResponse.create<Nothing>(
+                statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
+                message = e.message ?: "Something went wrong",
+                stack = e.stackTraceToString()
+            )
         }
     }
 
@@ -82,7 +85,11 @@ class CategoryController(private val service: CategoryService) {
             APIResponse.create(statusCode = HttpStatus.OK, data = result)
         } catch (e: Exception) {
             e.printStackTrace()
-            APIResponse.create<Nothing>(statusCode = HttpStatus.OK, stack = e.stackTraceToString())
+            APIResponse.create<Nothing>(
+                statusCode = HttpStatus.INTERNAL_SERVER_ERROR,
+                message = e.message ?: "Something went wrong",
+                stack = e.stackTraceToString()
+            )
         }
     }
 }
